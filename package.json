@@ -1,0 +1,28 @@
+{
+  "name": "fridge-chef",
+  "version": "1.0.0",
+  "description": "FridgeChef - AI-Powered Recipe Generator from Fridge Photos",
+  "scripts": {
+    "start": "serve . -l 3000",
+    "dev": "serve . -l 3000",
+    "server": "node backend/server.js",
+    "dev:backend": "node --watch backend/server.js"
+  },
+  "keywords": [
+    "recipe-generator",
+    "ai",
+    "gemini",
+    "fridge-chef"
+  ],
+  "author": "KK",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
+

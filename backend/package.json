@@ -1,0 +1,25 @@
+{
+  "name": "gemini-backend-wrapper",
+  "version": "1.0.0",
+  "description": "Backend wrapper API for Gemini 2.5 Flash generateContent endpoint, ready for Vercel deployment.",
+  "main": "api/generate.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "gemini",
+    "gemini-2.5-flash",
+    "wrapper-api",
+    "vercel",
+    "serverless",
+    "recipe-gen"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}

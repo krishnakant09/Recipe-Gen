@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FridgeChef — Recipes from your fridge</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" id="brandLogo" aria-label="FridgeChef Home">
+        <div class="logo-icon-wrapper">
+          <span class="logo-icon">🍳</span>
+        </div>
+        <div class="logo-text-group">
+          <span class="brand-name">Fridge<span class="accent-text">Chef</span></span>
+          <span class="brand-badge">AI CHEF</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="#uploadSection" class="nav-link" id="navGenerateLink">
+          <span class="nav-link-icon">✨</span>
+          <span>Generate</span>
+        </a>
+        <a href="#dietFilters" class="nav-link" id="navDietsLink">
+          <span class="nav-link-icon">🥦</span>
+          <span>Diets</span>
+        </a>
+        <button class="nav-link-btn" id="howItWorksBtn" type="button">
+          <span class="nav-link-icon">💡</span>
+          <span>How It Works</span>
+        </button>
+      </nav>
+
+      <!-- Nav Right Action Controls -->
+      <div class="nav-actions">
+        <button id="apiKeyBtn" class="nav-btn action-btn key-btn" title="Configure Gemini API Key" type="button">
+          <span class="key-status-dot" id="keyStatusDot"></span>
+          <span class="key-btn-icon">🔑</span>
+          <span class="btn-label">API Key</span>
+        </button>
+
+        <button id="savedBtn" class="nav-btn action-btn saved-nav-btn" title="Saved Recipes" type="button">
+          <span class="saved-heart">❤️</span>
+          <span class="btn-label">Saved</span>
+          <span class="saved-badge" id="savedCountBadge">0</span>
+        </button>
+
+        <button id="themeToggle" class="nav-btn theme-toggle-btn" title="Toggle Light/Dark Mode" aria-label="Toggle theme" type="button">
+          <span class="theme-icon" id="themeIcon">🌙</span>
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="hamburger-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" type="button">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <div class="mobile-drawer-inner">
+        <a href="#uploadSection" class="mobile-nav-link" id="mobileNavGenerate">
+          <span class="mobile-link-icon">✨</span>
+          <span class="mobile-link-text">Generate Recipes</span>
+        </a>
+        <a href="#dietFilters" class="mobile-nav-link" id="mobileNavDiets">
+          <span class="mobile-link-icon">🥦</span>
+          <span class="mobile-link-text">Dietary Filters</span>
+        </a>
+        <button class="mobile-nav-link" id="mobileHowItWorksBtn" type="button">
+          <span class="mobile-link-icon">💡</span>
+          <span class="mobile-link-text">How It Works</span>
+        </button>
+        <button class="mobile-nav-link" id="mobileSavedBtn" type="button">
+          <span class="mobile-link-icon">❤️</span>
+          <span class="mobile-link-text">Saved Recipes</span>
+          <span class="saved-badge" id="mobileSavedBadge">0</span>
+        </button>
+        <button class="mobile-nav-link" id="mobileApiKeyBtn" type="button">
+          <span class="mobile-link-icon">🔑</span>
+          <span class="mobile-link-text">API Key Settings</span>
+          <span class="key-status-pill" id="mobileKeyStatus">Connected</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="eyebrow">AI-Powered Recipe Generator By KK</p>
+    <h1>What's in your<br /><span class="accent">fridge?</span></h1>
+    <p class="subtitle">Snap a photo of your ingredients and get restaurant-worthy recipes in seconds.</p>
+  </section>
+
+  <!-- UPLOAD SECTION -->
+  <section class="upload-section" id="uploadSection">
+    <div class="upload-card" id="uploadCard">
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">📸</div>
+        <p class="upload-title">Drop your fridge photo here</p>
+        <p class="upload-sub">or click to browse</p>
+        <input type="file" id="fileInput" accept="image/*" hidden />
+        <button class="upload-btn" id="uploadBtn">Choose Photo</button>
+      </div>
+      <div class="preview-area" id="previewArea" style="display:none;">
+        <img id="previewImg" src="" alt="Fridge preview" />
+        <button class="remove-btn" id="removeBtn">✕ Remove</button>
+      </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters" id="dietFilters">
+      <span class="filter-label">Diet:</span>
+      <button class="filter-btn active" data-diet="any">Any</button>
+      <button class="filter-btn" data-diet="vegetarian">🥦 Vegetarian</button>
+      <button class="filter-btn" data-diet="vegan">🌱 Vegan</button>
+      <button class="filter-btn" data-diet="keto">🥩 Keto</button>
+    </div>
+
+    <button class="generate-btn" id="generateBtn" disabled>
+      <span id="btnText">✨ Generate Recipes</span>
+    </button>
+  </section>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading" style="display:none;">
+    <div class="loading-spinner"></div>
+    <p class="loading-text" id="loadingText">Scanning your ingredients...</p>
+  </div>
+
+  <!-- INGREDIENTS FOUND -->
+  <section class="ingredients-section" id="ingredientsSection" style="display:none;">
+    <h2>🛒 Ingredients Found</h2>
+    <div class="ingredient-tags" id="ingredientTags"></div>
+  </section>
+
+  <!-- RECIPES -->
+  <section class="recipes-section" id="recipesSection" style="display:none;">
+    <h2>🍽️ Your Recipes</h2>
+    <div class="recipes-grid" id="recipesGrid"></div>
+  </section>
+
+  <!-- SAVED RECIPES MODAL -->
+  <div class="modal-overlay" id="modalOverlay" style="display:none;">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>❤️ Saved Recipes</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close saved recipes">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS MODAL -->
+  <div class="modal-overlay" id="howItWorksOverlay" style="display:none;">
+    <div class="modal guide-modal">
+      <div class="modal-header">
+        <h2>💡 How FridgeChef Works</h2>
+        <button class="modal-close" id="howItWorksClose" aria-label="Close how it works">✕</button>
+      </div>
+      <div class="modal-body guide-body">
+        <div class="guide-step">
+          <div class="step-badge">1</div>
+          <div class="step-content">
+            <h3>📸 Snap Your Ingredients</h3>
+            <p>Take a quick photo of your fridge, pantry, or groceries and upload it here.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-badge">2</div>
+          <div class="step-content">
+            <h3>🥦 Choose Dietary Preference</h3>
+            <p>Filter by Vegetarian, Vegan, Keto, or leave as Any to get tailored recipes.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-badge">3</div>
+          <div class="step-content">
+            <h3>✨ Instant AI Chef Recipes</h3>
+            <p>Gemini Vision AI detects ingredients and crafts customized gourmet recipes with macros!</p>
+          </div>
+        </div>
+        <button class="generate-btn" id="startCookingBtn" style="margin-top: 10px;">Let's Cook! 🍳</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- API KEY PROMPT -->
+  <div class="modal-overlay" id="apiKeyOverlay">
+    <div class="modal api-key-modal">
+      <div class="api-key-header-row">
+        <div class="api-key-icon">🔑</div>
+        <button class="modal-close" id="apiKeyClose" aria-label="Close API key dialog" style="display:none;">✕</button>
+      </div>
+      <h2>Enter Your Gemini API Key</h2>
+      <p>Get a free key from <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer">aistudio.google.com</a> — it's 100% free with no credit card needed.</p>
+      <input type="text" id="apiKeyInput" placeholder="AIzaSy..." autocomplete="off" />
+      <button class="generate-btn" id="saveApiKey">Save & Continue →</button>
+      <p style="font-size: 0.8rem; opacity: 0.75; margin-top: 10px; text-align: center;">💡 If you configured <code>GEMINI_API_KEY</code> in your backend/Vercel, you can simply close this modal.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
