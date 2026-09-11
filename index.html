@@ -199,17 +199,21 @@
   </div>
 
   <!-- API KEY PROMPT -->
-  <div class="modal-overlay" id="apiKeyOverlay">
+  <div class="modal-overlay" id="apiKeyOverlay" style="display:none;">
     <div class="modal api-key-modal">
       <div class="api-key-header-row">
         <div class="api-key-icon">🔑</div>
-        <button class="modal-close" id="apiKeyClose" aria-label="Close API key dialog" style="display:none;">✕</button>
+        <button class="modal-close" id="apiKeyClose" aria-label="Close API key dialog">✕</button>
       </div>
-      <h2>Enter Your Gemini API Key</h2>
-      <p>Get a free key from <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer">aistudio.google.com</a> — it's 100% free with no credit card needed.</p>
-      <input type="text" id="apiKeyInput" placeholder="AIzaSy..." autocomplete="off" />
-      <button class="generate-btn" id="saveApiKey">Save & Continue →</button>
-      <p style="font-size: 0.8rem; opacity: 0.75; margin-top: 10px; text-align: center;">💡 If you configured <code>GEMINI_API_KEY</code> in your backend/Vercel, you can simply close this modal.</p>
+      <h2>Gemini API Configuration</h2>
+      <div id="backendKeyNotice" style="display:none; background: rgba(56, 201, 138, 0.12); border: 1px solid rgba(56, 201, 138, 0.4); border-radius: 10px; padding: 12px; margin-bottom: 16px; text-align: left; font-size: 0.85rem; color: var(--text);">
+        <strong style="color: #38c98a; display: block; margin-bottom: 4px;">✅ Backend API Key Active!</strong>
+        Your Vercel backend has <code>GEMINI_API_KEY</code> configured. You do not need to enter a key here.
+      </div>
+      <p id="apiKeyDesc">Get a free key from <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer">aistudio.google.com</a> if you wish to override the backend key with your own personal key (optional).</p>
+      <input type="text" id="apiKeyInput" placeholder="AIzaSy... (Optional)" autocomplete="off" />
+      <button class="generate-btn" id="saveApiKey">Save Custom Key →</button>
+      <button class="close-modal-btn" id="dismissApiKeyBtn" type="button" style="margin-top: 10px; width: 100%; padding: 12px; background: var(--bg3); border: 1px solid var(--border); color: var(--text); border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s;">Close (Use Backend Key) ✓</button>
     </div>
   </div>
 

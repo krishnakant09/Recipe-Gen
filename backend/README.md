@@ -95,7 +95,7 @@ The server will be running at `http://localhost:5000`.
    - **Value**: `AIzaSy...` (your Gemini API key)
 6. Click **Deploy**.
 
-Your API will be live at `https://your-backend-project.vercel.app/api/generate`!
+Your API is live at `https://recipe-gen-gules.vercel.app/api/generate`!
 
 ---
 
@@ -143,20 +143,11 @@ Your API will be live at `https://your-backend-project.vercel.app/api/generate`!
 
 ## 🔌 Updating Frontend (`script.js`)
 
-In your frontend `script.js`, replace the direct Google API call:
-
 ```javascript
-// BEFORE (Exposed API key in frontend):
-const response = await fetch(
-  `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-  { ... }
-);
+const BACKEND_API_BASE = "https://recipe-gen-gules.vercel.app";
+// (Or "http://localhost:5000" during local testing)
 
-// AFTER (Using your Vercel backend wrapper):
-const BACKEND_API_URL = "https://your-backend-project.vercel.app/api/generate";
-// (Or "http://localhost:5000/api/generate" during local testing)
-
-const response = await fetch(BACKEND_API_URL, {
+const response = await fetch(`${BACKEND_API_BASE}/api/generate`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({

@@ -49,6 +49,8 @@ const mobileApiKeyBtn = document.getElementById("mobileApiKeyBtn");
 const keyStatusDot = document.getElementById("keyStatusDot");
 const mobileKeyStatus = document.getElementById("mobileKeyStatus");
 const apiKeyClose = document.getElementById("apiKeyClose");
+const dismissApiKeyBtn = document.getElementById("dismissApiKeyBtn");
+const backendKeyNotice = document.getElementById("backendKeyNotice");
 
 // How It Works Guide
 const howItWorksBtn = document.getElementById("howItWorksBtn");
@@ -66,16 +68,18 @@ const mobileNavDiets = document.getElementById("mobileNavDiets");
 // =====================
 // API CONFIGURATION
 // =====================
+const BACKEND_API_BASE = "https://recipe-gen-gules.vercel.app";
+
 function getApiBase() {
   const customUrl = localStorage.getItem("fridgechef_backend_url");
   if (customUrl) return customUrl.replace(/\/+$/, "");
   const isLocalDev =
     window.location.hostname === "localhost" ||
     window.location.hostname === "127.0.0.1";
-  if (isLocalDev && window.location.port !== "5000") {
+  if (isLocalDev && window.location.port === "5000") {
     return "http://localhost:5000";
   }
-  return "";
+  return BACKEND_API_BASE;
 }
 
 function getApiEndpoint() {
@@ -98,6 +102,7 @@ async function checkBackendHealth() {
         updateKeyStatus();
         apiKeyOverlay.style.display = "none";
         if (apiKeyClose) apiKeyClose.style.display = "flex";
+        if (backendKeyNotice) backendKeyNotice.style.display = "block";
       }
     }
   } catch (err) {
@@ -112,13 +117,8 @@ updateKeyStatus();
 updateSavedBadge(false);
 checkBackendHealth();
 
-if (apiKey) {
-  apiKeyOverlay.style.display = "none";
-  if (apiKeyClose) apiKeyClose.style.display = "flex";
-} else {
-  // Allow user to close modal if using backend
-  if (apiKeyClose) apiKeyClose.style.display = "flex";
-}
+apiKeyOverlay.style.display = "none";
+if (apiKeyClose) apiKeyClose.style.display = "flex";
 
 // Navbar scroll shadow
 window.addEventListener("scroll", () => {
@@ -170,9 +170,24 @@ if (apiKeyClose) {
   });
 }
 
+if (dismissApiKeyBtn) {
+  dismissApiKeyBtn.addEventListener("click", () => {
+    apiKeyOverlay.style.display = "none";
+  });
+}
+
 apiKeyOverlay.addEventListener("click", (e) => {
   if (e.target === apiKeyOverlay) {
     apiKeyOverlay.style.display = "none";
+  }
+});
+
+// Allow Escape key to dismiss any open modal
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    if (apiKeyOverlay) apiKeyOverlay.style.display = "none";
+    if (modalOverlay) modalOverlay.style.display = "none";
+    if (howItWorksOverlay) howItWorksOverlay.style.display = "none";
   }
 });
 
