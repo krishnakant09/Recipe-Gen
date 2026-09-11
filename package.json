@@ -6,7 +6,8 @@
     "start": "serve . -l 3000",
     "dev": "serve . -l 3000",
     "server": "node backend/server.js",
-    "dev:backend": "node --watch backend/server.js"
+    "dev:backend": "node --watch backend/server.js",
+    "deploy": "firebase-tools deploy --only hosting"
   },
   "keywords": [
     "recipe-generator",
@@ -22,6 +23,7 @@
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "firebase-tools": "^15.30.0",
     "serve": "^14.2.4"
   }
 }
