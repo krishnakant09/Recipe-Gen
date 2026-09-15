@@ -56,6 +56,12 @@
           <span class="saved-badge" id="savedCountBadge">0</span>
         </button>
 
+        <button id="shoppingListBtn" class="nav-btn action-btn shopping-nav-btn" title="Grocery Shopping List" type="button">
+          <span class="shopping-cart-icon">🛒</span>
+          <span class="btn-label">Groceries</span>
+          <span class="saved-badge" id="shoppingCountBadge">0</span>
+        </button>
+
         <button id="themeToggle" class="nav-btn theme-toggle-btn" title="Toggle Light/Dark Mode" aria-label="Toggle theme" type="button">
           <span class="theme-icon" id="themeIcon">🌙</span>
         </button>
@@ -88,6 +94,11 @@
           <span class="mobile-link-icon">❤️</span>
           <span class="mobile-link-text">Saved Recipes</span>
           <span class="saved-badge" id="mobileSavedBadge">0</span>
+        </button>
+        <button class="mobile-nav-link" id="mobileShoppingListBtn" type="button">
+          <span class="mobile-link-icon">🛒</span>
+          <span class="mobile-link-text">Shopping List</span>
+          <span class="saved-badge" id="mobileShoppingBadge">0</span>
         </button>
         <button class="mobile-nav-link" id="mobileApiKeyBtn" type="button">
           <span class="mobile-link-icon">🔑</span>
@@ -123,11 +134,31 @@
 
     <!-- FILTERS -->
     <div class="filters" id="dietFilters">
-      <span class="filter-label">Diet:</span>
+      <span class="filter-label">Diet & Lifestyle:</span>
       <button class="filter-btn active" data-diet="any">Any</button>
       <button class="filter-btn" data-diet="vegetarian">🥦 Vegetarian</button>
       <button class="filter-btn" data-diet="vegan">🌱 Vegan</button>
       <button class="filter-btn" data-diet="keto">🥩 Keto</button>
+      <button class="filter-btn" data-diet="gluten-free">🌾 Gluten-Free</button>
+      <button class="filter-btn" data-diet="dairy-free">🥛 Dairy-Free</button>
+      <button class="filter-btn" data-diet="high-protein">💪 High-Protein</button>
+      <button class="filter-btn" data-diet="low-carb">🥑 Low-Carb</button>
+    </div>
+
+    <!-- PANTRY STAPLES ACCORDION / TOGGLE -->
+    <div class="pantry-staples-box" id="pantryStaplesBox">
+      <div class="pantry-staples-header" id="pantryStaplesToggle">
+        <div class="pantry-header-title">
+          <span class="pantry-icon">🧂</span>
+          <span>Pantry Staples On Hand</span>
+          <span class="pantry-count-badge" id="pantryCountBadge">Selected (6)</span>
+        </div>
+        <span class="pantry-arrow" id="pantryArrow">▼</span>
+      </div>
+      <div class="pantry-content" id="pantryContent" style="display:none;">
+        <p class="pantry-desc">AI assumes you have these seasonings & basics so your recipes turn out delicious without extra shopping:</p>
+        <div class="pantry-chips-grid" id="pantryChipsGrid"></div>
+      </div>
     </div>
 
     <button class="generate-btn" id="generateBtn" disabled>
@@ -214,6 +245,162 @@
       <input type="text" id="apiKeyInput" placeholder="AIzaSy... (Optional)" autocomplete="off" />
       <button class="generate-btn" id="saveApiKey">Save Custom Key →</button>
       <button class="close-modal-btn" id="dismissApiKeyBtn" type="button" style="margin-top: 10px; width: 100%; padding: 12px; background: var(--bg3); border: 1px solid var(--border); color: var(--text); border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s;">Close (Use Backend Key) ✓</button>
+    </div>
+  </div>
+
+  <!-- COOK MODE FULLSCREEN OVERLAY -->
+  <div class="cook-mode-overlay" id="cookModeOverlay" style="display:none;" role="dialog" aria-modal="true" aria-label="Kitchen Cook Mode">
+    <div class="cook-mode-container">
+      <!-- Cook Mode Header -->
+      <div class="cook-header">
+        <div class="cook-recipe-info">
+          <span class="cook-recipe-emoji" id="cookRecipeEmoji">🍳</span>
+          <div>
+            <h2 class="cook-recipe-name" id="cookRecipeName">Recipe Title</h2>
+            <div class="cook-step-tracker">
+              <span id="cookStepBadge">Step 1 of 4</span>
+              <span class="cook-time-badge" id="cookTotalTime">⏱ 20 mins</span>
+            </div>
+          </div>
+        </div>
+        <div class="cook-header-actions">
+          <button class="cook-icon-btn" id="cookTtsBtn" title="Read Step Aloud" aria-label="Read step aloud">
+            <span id="cookTtsIcon">🔊</span>
+            <span class="btn-text-sm">Read</span>
+          </button>
+          <button class="cook-icon-btn" id="cookExitBtn" title="Exit Cook Mode" aria-label="Exit Cook Mode">✕</button>
+        </div>
+      </div>
+
+      <!-- Step Progress Bar -->
+      <div class="cook-progress-track">
+        <div class="cook-progress-bar" id="cookProgressBar" style="width: 25%;"></div>
+      </div>
+
+      <!-- Main Step Viewer -->
+      <div class="cook-step-viewer">
+        <div class="cook-step-number" id="cookStepNumber">STEP 1</div>
+        <div class="cook-step-text" id="cookStepText">
+          Prep your ingredients by chopping vegetables into even pieces.
+        </div>
+
+        <!-- Smart Timer Box (auto-activated if time detected) -->
+        <div class="cook-timer-box" id="cookTimerBox" style="display:none;">
+          <div class="timer-display-wrap">
+            <div class="timer-clock-icon">⏱️</div>
+            <div class="timer-digits" id="timerDigits">05:00</div>
+            <div class="timer-label" id="timerLabel">Simmer Timer</div>
+          </div>
+          <div class="timer-controls">
+            <button class="timer-btn timer-btn-primary" id="timerStartBtn">▶ Start</button>
+            <button class="timer-btn" id="timerResetBtn">↺ Reset</button>
+            <button class="timer-btn timer-btn-sm" id="timerPlus1m">+1m</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cook Mode Footer Navigation -->
+      <div class="cook-footer">
+        <button class="cook-nav-btn prev" id="cookPrevBtn" disabled>
+          <span>← Previous</span>
+        </button>
+        <div class="cook-shortcut-hint">
+          <span>Shortcuts: <b>←</b> / <b>→</b> navigate steps &bull; <b>Space</b> timer &bull; <b>Esc</b> exit</span>
+        </div>
+        <button class="cook-nav-btn next" id="cookNextBtn">
+          <span id="cookNextBtnText">Next Step →</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROCERY SHOPPING LIST DRAWER / MODAL -->
+  <div class="modal-overlay" id="shoppingListOverlay" style="display:none;">
+    <div class="modal shopping-modal">
+      <div class="modal-header">
+        <div class="shopping-modal-title">
+          <h2>🛒 Grocery Shopping List</h2>
+          <span class="shopping-item-count" id="shoppingItemCount">0 items</span>
+        </div>
+        <button class="modal-close" id="shoppingListClose" aria-label="Close Shopping List">✕</button>
+      </div>
+      <div class="shopping-add-row">
+        <input type="text" id="shoppingInput" placeholder="Add grocery item (e.g. 2 avocados)..." autocomplete="off" />
+        <button class="shopping-add-btn" id="shoppingAddBtn">+ Add</button>
+      </div>
+      <div class="shopping-list-items" id="shoppingListItems">
+        <!-- Rendered items with checkboxes and delete -->
+      </div>
+      <div class="shopping-actions-bar">
+        <button class="shop-action-btn" id="copyShoppingListBtn" title="Copy checklist to clipboard">
+          📋 Copy List
+        </button>
+        <button class="shop-action-btn shop-whatsapp-btn" id="shareWhatsappBtn" title="Send to WhatsApp">
+          💬 WhatsApp
+        </button>
+        <button class="shop-action-btn" id="amazonFreshBtn" title="Search missing items online">
+          🛒 Buy Online
+        </button>
+        <button class="shop-action-btn shop-clear-btn" id="clearShoppingListBtn" title="Clear all items">
+          🗑️ Clear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWEAK RECIPE AI MODAL -->
+  <div class="modal-overlay" id="tweakModalOverlay" style="display:none;">
+    <div class="modal tweak-modal">
+      <div class="modal-header">
+        <h2>✨ Tweak This Recipe</h2>
+        <button class="modal-close" id="tweakModalClose" aria-label="Close Tweak Modal">✕</button>
+      </div>
+      <div class="tweak-modal-body">
+        <div class="tweak-target-recipe" id="tweakTargetRecipe">
+          <span class="tweak-target-emoji" id="tweakTargetEmoji">🍜</span>
+          <div>
+            <strong id="tweakTargetName">Recipe Name</strong>
+            <span class="tweak-target-sub" id="tweakTargetSub">Customizing this dish</span>
+          </div>
+        </div>
+
+        <label class="tweak-label">Quick AI Presets:</label>
+        <div class="tweak-presets-grid">
+          <button class="tweak-preset-chip" data-tweak="Make it extra spicy with bold chili and pepper flavors">🔥 Extra Spicy</button>
+          <button class="tweak-preset-chip" data-tweak="Cut calories under 400 kcal and make it lighter">⚡ Under 400 Kcal</button>
+          <button class="tweak-preset-chip" data-tweak="Adapt cooking steps specifically for an Air Fryer">🍟 Air Fryer Style</button>
+          <button class="tweak-preset-chip" data-tweak="Make it low-sodium and heart-healthy">🌿 Low Sodium</button>
+          <button class="tweak-preset-chip" data-tweak="Streamline steps for a fast 15-minute meal">⏱️ 15-Min Express</button>
+          <button class="tweak-preset-chip" data-tweak="Add a rich, cheesy, decadent twist">🧀 Extra Cheesy</button>
+          <button class="tweak-preset-chip" data-tweak="Make it 100% plant-based dairy-free">🌱 Plant-Based</button>
+        </div>
+
+        <label class="tweak-label" for="tweakCustomInput">Or write custom instructions:</label>
+        <textarea id="tweakCustomInput" rows="3" placeholder="e.g. Substitute mushrooms for bell peppers, make sauce creamier, or cook in an Instant Pot..."></textarea>
+
+        <button class="generate-btn" id="applyTweakBtn">
+          <span id="applyTweakBtnText">✨ Regenerate with AI Twist</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMART SUBSTITUTIONS MODAL -->
+  <div class="modal-overlay" id="subsModalOverlay" style="display:none;">
+    <div class="modal subs-modal">
+      <div class="modal-header">
+        <h2>🔄 Smart Ingredient Substitutions</h2>
+        <button class="modal-close" id="subsModalClose" aria-label="Close Substitutions">✕</button>
+      </div>
+      <div class="subs-modal-body">
+        <p class="subs-desc">Missing an ingredient? Swap it with common pantry alternatives without ruining the recipe:</p>
+        <div class="subs-search-box">
+          <input type="text" id="subsSearchInput" placeholder="Search ingredient (e.g. buttermilk, butter, heavy cream, soy sauce)..." />
+        </div>
+        <div class="subs-cards-container" id="subsCardsContainer">
+          <!-- Populated from curated database -->
+        </div>
+      </div>
     </div>
   </div>
 
