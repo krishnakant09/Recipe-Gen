@@ -21,18 +21,38 @@ Built with performance, privacy, and aesthetic excellence in mind, FridgeChef fe
 ## ✨ Features
 
 - 📸 **Visual Ingredient Detection**: Drag & drop or upload any fridge/pantry photo. Gemini Multimodal Vision AI scans and identifies items automatically.
-- 🥦 **Dietary Filtering**: Tailor recipe suggestions to your diet with one tap:
+- 🥦 **Dietary Filtering & Lifestyle**: Tailor recipe suggestions to your diet with one tap:
   - Any (Balanced / No restrictions)
   - 🥦 Vegetarian
   - 🌱 Vegan
   - 🥩 Keto
+  - 🌾 Gluten-Free
+  - 🥛 Dairy-Free
+  - 💪 High-Protein
+  - 🥑 Low-Carb
+- 🧂 **Pantry Staples Selector**: Select common seasonings & basics (salt, pepper, olive oil, garlic, butter, soy sauce, etc.) so Gemini includes them naturally without extra shopping.
+- 🧑‍🍳 **Fullscreen Kitchen & Cook Mode**:
+  - Distraction-free, large-text step-by-step cooking viewer.
+  - **Auto-Detected Smart Timers**: Automatically parses cooking times (e.g. *"simmer for 10 minutes"*) into interactive countdown timers with an audible completion chime.
+  - **Voice Assistant (Text-to-Speech)**: Read instructions aloud hands-free via the Web Speech API.
+  - Keyboard shortcuts (`←` / `→` step navigation, `Space` timer toggle, `Esc` exit).
+- ⚖️ **Dynamic Servings Scaler**: Toggle portions (`1x`, `2x`, `4x`, `6x`) on any recipe card to automatically recalculate fractional ingredient measurements and macronutrient values in real time.
+- ✨ **AI Recipe Tweaking & Variations**: Instant 1-click presets (*Extra Spicy*, *Under 400 kcal*, *Air Fryer Style*, *Low Sodium*, *15-Min Express*, *Plant-Based*) or custom instructions to adapt any dish on the fly.
+- 🔄 **Smart Culinary Substitutions**: Integrated instant lookup database with ratios and culinary tips for replacing hard-to-find ingredients.
+- 🛒 **Grocery Shopping List**:
+  - Add missing ingredients from any recipe or custom items with 1 click.
+  - Interactive checklist with persistent `localStorage` storage.
+  - 1-click **Copy List**, **WhatsApp Sharing**, and **Amazon Fresh** grocery search.
+- 🖨️ **Print, PDF Cards & Web Share**:
+  - Ink-friendly print stylesheet (`@media print`) for clean, physical kitchen recipe cards.
+  - Native `navigator.share()` integration for easy sharing with friends and family.
 - 🍽️ **Gourmet Recipe Cards**: Each recipe includes:
   - Prep & cooking time badges
   - Difficulty ratings (*Easy, Medium, Hard*)
-  - Exact ingredients checklist
+  - Exact ingredients checklist with dynamic portion scaling
   - Step-by-step cooking instructions
   - Estimated macronutrient breakdown (*Calories, Protein, Carbs*)
-- ❤️ **Saved Recipes (Favorites)**: Save your favorite dishes locally with `localStorage` persistence, accessible anytime via the Saved Recipes modal.
+- ❤️ **Saved Recipes (Favorites)**: Save your favorite dishes locally with `localStorage` persistence and launch Cook Mode directly from saved favorites.
 - 🌓 **Dark & Light Mode**: Curated color palettes with smooth transitions and persistent theme state.
 - 📱 **Mobile-First & Responsive**: Includes custom mobile drawer navigation, responsive grid layouts, and micro-animations.
 - 🔒 **Secure Serverless Architecture**:
