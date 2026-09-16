@@ -1,79 +1,146 @@
 # 🍳 FridgeChef — AI-Powered Recipe Generator
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-green.svg)](https://nodejs.org/)
-[![Google Gemini](https://img.shields.io/badge/Google_Gemini-Vision_AI-blue.svg)](https://aistudio.google.com/)
-[![Vercel](https://img.shields.io/badge/Backend-Vercel_Serverless-black.svg)](https://vercel.com/)
-[![Firebase](https://img.shields.io/badge/Frontend-Firebase_Hosting-orange.svg)](https://firebase.google.com/)
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+  <img src="https://img.shields.io/badge/Node.js-18%2B-339933.svg?logo=node.js&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Google_Gemini-Vision_AI-4285F4.svg?logo=google&logoColor=white" alt="Google Gemini" />
+  <img src="https://img.shields.io/badge/Backend-Vercel_Serverless-000000.svg?logo=vercel&logoColor=white" alt="Vercel" />
+  <img src="https://img.shields.io/badge/Frontend-Firebase_Hosting-FFCA28.svg?logo=firebase&logoColor=black" alt="Firebase" />
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" />
+</p>
 
-> **Turn your leftover fridge ingredients into delicious, chef-curated meals in seconds using Google Gemini Vision AI.**
+<p align="center">
+  <strong>Turn leftover fridge ingredients into delicious, chef-curated meals in seconds using Google Gemini Multimodal Vision AI.</strong>
+</p>
+
+---
+
+## 📑 Table of Contents
+
+- [📖 Overview](#-overview)
+- [✨ Features](#-features)
+  - [📸 Visual Ingredient Recognition](#-visual-ingredient-recognition)
+  - [🧑‍🍳 Fullscreen Kitchen & Cook Mode](#-fullscreen-kitchen--cook-mode)
+  - [⚖️ Dynamic Servings Scaler](#️-dynamic-servings-scaler)
+  - [✨ AI Recipe Tweaking](#-ai-recipe-tweaking)
+  - [🔄 Smart Culinary Substitutions](#-smart-culinary-substitutions)
+  - [🛒 Grocery Shopping List](#-grocery-shopping-list)
+  - [🥦 Dietary & Lifestyle Filters](#-dietary--lifestyle-filters)
+  - [🖨️ Ink-Friendly Print & Web Share](#️-ink-friendly-print--web-share)
+- [⌨️ Keyboard Shortcuts](#️-keyboard-shortcuts)
+- [🏗️ System Architecture](#️-system-architecture)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📁 Repository Structure](#-repository-structure)
+- [🚀 Quick Start (Local Setup)](#-quick-start-local-setup)
+- [📡 API Reference](#-api-reference)
+- [🌐 Deployment Guide](#-deployment-guide)
+- [⚙️ Environment Variables](#️-environment-variables)
+- [🤝 Contributing](#-contributing)
+- [🗺️ Roadmap](#️-roadmap)
+- [📄 License](#-license)
+- [👨‍💻 Author](#-author)
 
 ---
 
 ## 📖 Overview
 
-**FridgeChef** is an intelligent full-stack web application that takes the guesswork out of home cooking. Simply snap or upload a photo of your refrigerator, pantry, or grocery haul, select your dietary preferences (Vegetarian, Vegan, Keto, or Any), and let Gemini's multimodal vision model analyze your ingredients to craft 3 personalized, step-by-step recipes complete with nutritional estimates.
+**FridgeChef** is an intelligent full-stack web application designed to minimize food waste and eliminate the daily headache of *"What should I cook today?"*. 
 
-Built with performance, privacy, and aesthetic excellence in mind, FridgeChef features a sleek glassmorphism UI, seamless dark/light mode toggle, bookmarking system, and a secure serverless backend proxy to protect API keys.
+Simply take or upload a photo of your refrigerator, pantry shelves, or grocery haul. **Google Gemini Vision AI** scans and identifies visible ingredients, combines them with your preferred staples, and crafts 3 gourmet, chef-calibrated recipes tailored to your dietary goals—complete with step-by-step instructions, interactive cooking timers, and macronutrient breakdowns.
 
 ---
 
 ## ✨ Features
 
-- 📸 **Visual Ingredient Detection**: Drag & drop or upload any fridge/pantry photo. Gemini Multimodal Vision AI scans and identifies items automatically.
-- 🥦 **Dietary Filtering & Lifestyle**: Tailor recipe suggestions to your diet with one tap:
-  - Any (Balanced / No restrictions)
-  - 🥦 Vegetarian
-  - 🌱 Vegan
-  - 🥩 Keto
-  - 🌾 Gluten-Free
-  - 🥛 Dairy-Free
-  - 💪 High-Protein
-  - 🥑 Low-Carb
-- 🧂 **Pantry Staples Selector**: Select common seasonings & basics (salt, pepper, olive oil, garlic, butter, soy sauce, etc.) so Gemini includes them naturally without extra shopping.
-- 🧑‍🍳 **Fullscreen Kitchen & Cook Mode**:
-  - Distraction-free, large-text step-by-step cooking viewer.
-  - **Auto-Detected Smart Timers**: Automatically parses cooking times (e.g. *"simmer for 10 minutes"*) into interactive countdown timers with an audible completion chime.
-  - **Voice Assistant (Text-to-Speech)**: Read instructions aloud hands-free via the Web Speech API.
-  - Keyboard shortcuts (`←` / `→` step navigation, `Space` timer toggle, `Esc` exit).
-- ⚖️ **Dynamic Servings Scaler**: Toggle portions (`1x`, `2x`, `4x`, `6x`) on any recipe card to automatically recalculate fractional ingredient measurements and macronutrient values in real time.
-- ✨ **AI Recipe Tweaking & Variations**: Instant 1-click presets (*Extra Spicy*, *Under 400 kcal*, *Air Fryer Style*, *Low Sodium*, *15-Min Express*, *Plant-Based*) or custom instructions to adapt any dish on the fly.
-- 🔄 **Smart Culinary Substitutions**: Integrated instant lookup database with ratios and culinary tips for replacing hard-to-find ingredients.
-- 🛒 **Grocery Shopping List**:
-  - Add missing ingredients from any recipe or custom items with 1 click.
-  - Interactive checklist with persistent `localStorage` storage.
-  - 1-click **Copy List**, **WhatsApp Sharing**, and **Amazon Fresh** grocery search.
-- 🖨️ **Print, PDF Cards & Web Share**:
-  - Ink-friendly print stylesheet (`@media print`) for clean, physical kitchen recipe cards.
-  - Native `navigator.share()` integration for easy sharing with friends and family.
-- 🍽️ **Gourmet Recipe Cards**: Each recipe includes:
-  - Prep & cooking time badges
-  - Difficulty ratings (*Easy, Medium, Hard*)
-  - Exact ingredients checklist with dynamic portion scaling
-  - Step-by-step cooking instructions
-  - Estimated macronutrient breakdown (*Calories, Protein, Carbs*)
-- ❤️ **Saved Recipes (Favorites)**: Save your favorite dishes locally with `localStorage` persistence and launch Cook Mode directly from saved favorites.
-- 🌓 **Dark & Light Mode**: Curated color palettes with smooth transitions and persistent theme state.
-- 📱 **Mobile-First & Responsive**: Includes custom mobile drawer navigation, responsive grid layouts, and micro-animations.
-- 🔒 **Secure Serverless Architecture**:
-  - Backend proxy hides `GEMINI_API_KEY` from the browser.
-  - Vercel Serverless Function deployed and ready out of the box.
-  - Optional custom API key override directly in the UI for personal AI Studio keys.
+### 📸 Visual Ingredient Recognition
+- **Multimodal AI Scanning**: Drag & drop or upload any fridge or pantry photo. Gemini analyzes images directly to identify produce, dairy, proteins, and condiments.
+- **Pantry Staples Integration**: Toggle everyday essentials (*Salt, Black Pepper, Olive Oil, Garlic, Butter, Soy Sauce, etc.*) so recipes make natural use of basics you already have without extra grocery trips.
+
+### 🧑‍🍳 Fullscreen Kitchen & Cook Mode
+- **Distraction-Free Cooking View**: Focused, high-contrast modal presenting one instruction step at a time with large, easy-to-read typography.
+- **Smart Auto-Detected Timers**: Automatically parses durations from steps (e.g., *"simmer for 10 minutes"*) into interactive countdown timers.
+- **Audio Chime Notification**: Plays a pleasant synthesizer chime via the Web Audio API when countdown timers finish.
+- **Hands-Free Voice Assistant (TTS)**: Built-in Text-to-Speech via the browser's Web Speech API to read instructions aloud while your hands are busy cooking.
+
+### ⚖️ Dynamic Servings Scaler
+- **Instant Portion Adjustment**: Toggle between `1x`, `2x` (default), `4x`, and `6x` servings on any recipe card.
+- **Mathematical Fraction Recalculation**: Dynamically recalculates fractional ingredient measurements (e.g. `1/2 cup` ➔ `1 cup` ➔ `2 cups`) and nutritional macros (*Calories, Protein, Carbs*) in real time.
+
+### ✨ AI Recipe Tweaking
+- **One-Click Culinary Presets**: Instantly refine any recipe with targeted modifiers:
+  - 🔥 *Extra Spicy*
+  - ⚡ *Under 400 Kcal*
+  - 🍟 *Air Fryer Style*
+  - 🌿 *Low Sodium*
+  - ⏱️ *15-Min Express*
+  - 🧀 *Extra Cheesy*
+  - 🌱 *Plant-Based*
+- **Custom Prompt Tweaks**: Enter custom instructions (*e.g., "Replace cream with oat milk and make it crispy"*) to have Gemini regenerate the dish in-place.
+
+### 🔄 Smart Culinary Substitutions
+- **Curated Alternatives Database**: Searchable guide of 18+ common culinary substitutes with exact substitution ratios and chef notes (e.g. Buttermilk, Heavy Cream, Eggs, Soy Sauce, Cornstarch).
+
+### 🛒 Grocery Shopping List
+- **1-Click Missing Ingredients**: Export any recipe's ingredients into a dedicated shopping checklist with persistent `localStorage` storage.
+- **Actionable Sharing**:
+  - 📋 **Copy to Clipboard**: Clean markdown checklist formatting.
+  - 💬 **WhatsApp Export**: 1-click sharing pre-filled for grocery runs.
+  - 🛒 **Online Ordering**: Quick-link to search items directly on Amazon Fresh.
+
+### 🥦 Dietary & Lifestyle Filters
+- Tailor suggestions with a single click:
+  - **Any** (Balanced / No restrictions)
+  - 🥦 **Vegetarian**
+  - 🌱 **Vegan**
+  - 🥩 **Keto**
+  - 🌾 **Gluten-Free**
+  - 🥛 **Dairy-Free**
+  - 💪 **High-Protein** (30g+ protein target)
+  - 🥑 **Low-Carb** (<20g net carbs)
+
+### 🖨️ Ink-Friendly Print & Web Share
+- **Clean Physical Recipe Cards**: Dedicated `@media print` CSS formats recipes into crisp black-and-white printable cards with checkboxes for kitchen use.
+- **Native Web Share**: Share recipes directly across mobile devices via `navigator.share()`.
+
+---
+
+## ⌨️ Keyboard Shortcuts
+
+| Shortcut | Context | Action |
+|---|---|---|
+| `→` (Right Arrow) | Kitchen Cook Mode | Next step |
+| `←` (Left Arrow) | Kitchen Cook Mode | Previous step |
+| `Space` | Kitchen Cook Mode | Start / Pause cooking timer |
+| `Esc` | Anywhere | Dismiss open modals / Exit Cook Mode |
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    User([👤 User]) -->|Uploads Fridge Photo & Selects Diet| Frontend[🖥️ FridgeChef Frontend\nVanilla HTML5 / CSS3 / ES6+]
+    Frontend -->|POST /api/generate\nImage Base64 + Prompt| Proxy[🛡️ Serverless Proxy\nVercel / Node.js Express]
+    Proxy -->|Secure Call with GEMINI_API_KEY| Gemini[🤖 Google Gemini 3.6 Flash\nMultimodal Vision AI]
+    Gemini -->|Structured JSON Recipes| Proxy
+    Proxy -->|Parsed JSON Payload| Frontend
+    Frontend -->|Interactive Render| UI[🍽️ Recipe Cards / Cook Mode / Shopping List]
+```
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### **Frontend**
-- **HTML5 & CSS3**: Custom CSS variables, responsive grid & flexbox, glassmorphism design tokens.
+- **Core**: Vanilla HTML5, Modern CSS3 with Design Tokens & Glassmorphism, Vanilla ES6+ JavaScript.
+- **Web APIs**: Web Speech API (TTS), Web Audio API (Timer Chimes), Web Share API (`navigator.share`), FileReader API, Canvas & Drag-and-Drop.
 - **Typography**: Google Fonts ([Playfair Display](https://fonts.google.com/specimen/Playfair+Display) & [Inter](https://fonts.google.com/specimen/Inter)).
-- **JavaScript (ES6+)**: Vanilla asynchronous JS, FileReader API, Canvas & Drag-and-Drop APIs.
 - **Hosting**: Firebase Hosting (`fridgechef-f9f87`).
 
 ### **Backend & AI**
 - **Runtime**: Node.js, Express.js (local development).
 - **Serverless**: Vercel Serverless Functions (`/api/generate`, `/api/health`).
-- **AI Engine**: [Google Gemini 3.6 Flash / 2.5 Flash](https://aistudio.google.com/) via Google Generative Language API (`gemini-3.6-flash:generateContent`).
+- **AI Engine**: [Google Gemini 3.6 Flash](https://aistudio.google.com/) via Google Generative Language API (`gemini-3.6-flash:generateContent`).
 - **Middleware**: CORS, Body Parser (50MB base64 image payload support), Dotenv.
 
 ---
@@ -124,7 +191,6 @@ cd Recipe-Gen
 Create a `.env` file in the root directory or in `backend/`:
 
 ```bash
-# In project root or backend folder
 cp backend/.env.example backend/.env
 ```
 
@@ -145,8 +211,6 @@ cd backend && npm install && cd ..
 ```
 
 ### 4. Run Locally
-
-You can run the backend and frontend simultaneously:
 
 #### Terminal 1 — Start the Backend Server:
 ```bash
@@ -177,14 +241,14 @@ Checks whether the serverless API is online and whether `GEMINI_API_KEY` is conf
   "status": "ok",
   "hasApiKeyConfigured": true,
   "model": "gemini-3.6-flash",
-  "timestamp": "2026-09-11T16:52:00.000Z"
+  "timestamp": "2026-09-15T16:52:00.000Z"
 }
 ```
 
 ---
 
 ### `POST /api/generate`
-Generates ingredient analysis and structured recipe recommendations from an image.
+Generates ingredient analysis and structured recipe recommendations from an image or custom prompt.
 
 #### Headers
 | Header | Value | Description |
@@ -217,30 +281,19 @@ Generates ingredient analysis and structured recipe recommendations from an imag
 }
 ```
 
-#### Request Body (Simplified Format)
-```json
-{
-  "prompt": "Analyze this fridge photo and generate 3 recipes...",
-  "imageBase64": "<BASE64_OR_DATA_URL>",
-  "mimeType": "image/jpeg"
-}
-```
-
 ---
 
 ## 🌐 Deployment Guide
 
 ### Deploy Backend to Vercel
-
 1. Push your code to GitHub.
-2. Link your repository in [Vercel](https://vercel.com).
+2. Import your repository in [Vercel](https://vercel.com).
 3. In your project settings, add the Environment Variable:
    - **Name**: `GEMINI_API_KEY`
    - **Value**: Your Google Gemini API Key
 4. Deploy! Your backend API will be available at `https://<your-project>.vercel.app/api/generate`.
 
 ### Deploy Frontend to Firebase Hosting
-
 1. Ensure Firebase CLI is installed and authenticated:
    ```bash
    npx firebase-tools login
@@ -256,7 +309,7 @@ Generates ingredient analysis and structured recipe recommendations from an imag
 
 | Variable | Description | Default |
 |---|---|---|
-| `GEMINI_API_KEY` | Your Google Gemini API key from AI Studio | *Required* |
+| `GEMINI_API_KEY` | Your Google Gemini API key from Google AI Studio | *Required* |
 | `PORT` | Local development port for Express server | `5000` |
 | `GEMINI_MODEL` | Gemini AI model version used for generation | `gemini-3.6-flash` |
 
@@ -264,14 +317,32 @@ Generates ingredient analysis and structured recipe recommendations from an imag
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome!
-Feel free to check the [issues page](https://github.com/krishnakant09/Recipe-Gen/issues).
+Contributions, bug reports, and feature requests are welcome! To contribute:
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Fork the Project** (`https://github.com/krishnakant09/Recipe-Gen/fork`)
+2. **Create your Feature Branch**:
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+3. **Commit your Changes**:
+   ```bash
+   git commit -m "feat: Add AmazingFeature with interactive preview"
+   ```
+4. **Push to the Branch**:
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+5. **Open a Pull Request** describing your changes in detail.
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] 📱 PWA (Progressive Web App) offline support for saved recipes.
+- [ ] 📸 Multi-angle image capture (e.g. Fridge + Freezer + Pantry simultaneously).
+- [ ] 🥗 Barcode scanner for scanning packaged pantry goods.
+- [ ] 📅 7-Day Meal Planner calendar based on saved inventory.
+- [ ] 🌐 Internationalization (i18n) for multilingual recipe generation.
 
 ---
 
@@ -287,6 +358,4 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 - GitHub: [@krishnakant09](https://github.com/krishnakant09)
 - Repository: [Recipe-Gen](https://github.com/krishnakant09/Recipe-Gen)
 
----
-
-<p align="center">Made with ❤️ and Gemini AI</p>
+<p align="center">Made with ❤️ and Google Gemini AI</p>
