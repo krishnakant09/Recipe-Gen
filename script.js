@@ -7,7 +7,7 @@ let savedRecipes = JSON.parse(localStorage.getItem("fridgechef_saved") || "[]");
 let apiKey = localStorage.getItem("fridgechef_apikey") || "";
 let pantryStaples = JSON.parse(
   localStorage.getItem("fridgechef_pantry") ||
-    '["Salt", "Black Pepper", "Olive Oil", "Garlic", "Butter", "Soy Sauce"]'
+  '["Salt", "Black Pepper", "Olive Oil", "Garlic", "Butter", "Soy Sauce"]'
 );
 let shoppingList = JSON.parse(
   localStorage.getItem("fridgechef_shopping") || "[]"
@@ -694,7 +694,7 @@ if (amazonFreshBtn) {
     if (shoppingList.length === 0) return;
     const unchecked = shoppingList.filter((i) => !i.checked);
     const query = (unchecked[0] || shoppingList[0]).text;
-    window.open(`https://www.amazon.com/s?k=${encodeURIComponent(query)}&i=amazonfresh`, "_blank");
+    window.open(`https://blinkit.com/s/?q=${encodeURIComponent(query)}`, "_blank");
   });
 }
 
@@ -1016,7 +1016,7 @@ function playAudioChime() {
       osc.start(ctx.currentTime + idx * 0.16);
       osc.stop(ctx.currentTime + idx * 0.16 + 0.4);
     });
-  } catch (_) {}
+  } catch (_) { }
 }
 
 function toggleVoiceRead() {
@@ -1322,7 +1322,7 @@ async function shareRecipe(recipe) {
         url: window.location.href,
       });
       return;
-    } catch (_) {}
+    } catch (_) { }
   }
 
   try {
@@ -1438,7 +1438,7 @@ Generate exactly 3 recipes. Steps should be clear, actionable instructions with 
         openApiKeyModal();
         alert(
           data.error?.message ||
-            "Gemini API key missing. Please enter your API key or configure GEMINI_API_KEY in your backend."
+          "Gemini API key missing. Please enter your API key or configure GEMINI_API_KEY in your backend."
         );
         return;
       }
@@ -1462,8 +1462,8 @@ Generate exactly 3 recipes. Steps should be clear, actionable instructions with 
     generateBtn.disabled = false;
     alert(
       "Something went wrong: " +
-        err.message +
-        "\n\nMake sure the backend is running or check your API key."
+      err.message +
+      "\n\nMake sure the backend is running or check your API key."
     );
   }
 });
@@ -1529,19 +1529,18 @@ function renderRecipes(recipes) {
         <div class="recipe-section-title">Steps</div>
         <ol class="recipe-steps">
           ${recipe.steps
-            .map(
-              (step, i) => `
+        .map(
+          (step, i) => `
             <li>
               <span class="step-num">${i + 1}</span>
               <span>${step}</span>
             </li>
           `
-            )
-            .join("")}
+        )
+        .join("")}
         </ol>
-        ${
-          recipe.nutrition
-            ? `
+        ${recipe.nutrition
+        ? `
         <div class="nutrition-row">
           <div class="nutrition-item">
             <span class="nutrition-value">${recipe.nutrition.calories}</span>
@@ -1556,8 +1555,8 @@ function renderRecipes(recipes) {
             <span class="nutrition-label">Carbs</span>
           </div>
         </div>`
-            : ""
-        }
+        : ""
+      }
 
         <!-- Action Toolbar -->
         <div class="recipe-actions-bar">

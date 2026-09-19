@@ -85,7 +85,7 @@ Simply take or upload a photo of your refrigerator, pantry shelves, or grocery h
 - **Actionable Sharing**:
   - 📋 **Copy to Clipboard**: Clean markdown checklist formatting.
   - 💬 **WhatsApp Export**: 1-click sharing pre-filled for grocery runs.
-  - 🛒 **Online Ordering**: Quick-link to search items directly on Amazon Fresh.
+  - 🛒 **Online Ordering**: Quick-link to search items directly on Blinkit.
 
 ### 🥦 Dietary & Lifestyle Filters
 - Tailor suggestions with a single click:
